@@ -5,5 +5,4 @@ Authors: Brandon McGuckin and Jamie van Noten
 A crypto aggregator of yields, tokens, and news stories.
 
 Requirements:
-- coingecko API
 - colorama
