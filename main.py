@@ -6,10 +6,8 @@ import json
 import requests
 import colorama
 from colorama import Fore, Back, Style
-from pycoingecko import CoinGeckoAPI
 
 colorama.init(autoreset=True)
-cg = CoinGeckoAPI()
 
 # Authors: Brandon McGuckin and Jamie van Noten
 
@@ -44,8 +42,9 @@ def tokens():
         inputCategory = int(input())
         if (inputCategory in range(0, 132)):
             cat = data[inputCategory]["category_id"]
-            a_list = cg.get_coins_markets(vs_currency="usd", ids="", category=cat, order="market_cap_desc")
-            jsonStr = json.dumps(a_list, indent=4)
+            p = requests.request("GET", "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=" + cat + "&order=market_cap_desc")
+            pData = json.loads(p.text)
+            jsonStr = json.dumps(pData, indent=4)
             f = open("temp.json", "w")
             f.write(jsonStr)
             invalidInput = False
